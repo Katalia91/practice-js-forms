@@ -1,16 +1,23 @@
 const imagesList = document.querySelector(".images-list");
 const fileInput = document.querySelector("input[type='file']");
+const chosenFiles = [];
 
 fileInput.addEventListener("change", displayImages);
 
 function displayImages(e) {
   const files = e.target.files;
+
   for (const file of files) {
     createNewListElement(file);
+    chosenFiles.push({
+      name: file.name,
+      size: file.size,
+    });
   }
 }
 
 function createNewListElement(file) {
+  console.log(chosenFiles);
   const prototypeEl = document.querySelector(".images-list__item--prototype");
   const clonedPrototypeEl = prototypeEl.cloneNode(true);
   imagesList.appendChild(clonedPrototypeEl);
@@ -21,7 +28,6 @@ function createNewListElement(file) {
   const fileName = file.name;
   const fileSize = file.size;
   const fileSizeinMB = `File size: ${(fileSize * 0.000001).toFixed(2)} MB`;
-  console.log(fileSizeinMB);
   fileHeader.innerText = fileName;
   fileFooter.innerText = fileSizeinMB;
   if (file && file.type.includes("image")) {
