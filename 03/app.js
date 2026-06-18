@@ -4,15 +4,19 @@ const chosenFiles = [];
 
 fileInput.addEventListener("change", displayImages);
 
+function checkDuplicate(file, chosenFile) {
+  if (chosenFile.name !== file.name && chosenFile.size !== file.size) {
+    return false;
+  }
+}
 function displayImages(e) {
   const files = e.target.files;
-
   for (const file of files) {
-    createNewListElement(file);
     chosenFiles.push({
       name: file.name,
       size: file.size,
     });
+    createNewListElement(file);
   }
 }
 
