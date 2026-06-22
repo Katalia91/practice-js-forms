@@ -7,8 +7,6 @@ fileInput.addEventListener("change", displayImages);
 function isDuplicate(file, chosenFile) {
   if (file.name === chosenFile.name && file.size === chosenFile.size) {
     return true;
-  } else {
-    return false;
   }
 }
 
