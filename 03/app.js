@@ -5,10 +5,13 @@ const chosenFiles = [];
 fileInput.addEventListener("change", displayImages);
 
 function isDuplicate(file, chosenFile) {
-  if (chosenFile.name !== file.name && chosenFile.size !== file.size) {
+  if (file.name === chosenFile.name && file.size === chosenFile.size) {
+    return true;
+  } else {
     return false;
   }
 }
+
 function displayImages(e) {
   const files = e.target.files;
   for (const file of files) {
@@ -18,10 +21,10 @@ function displayImages(e) {
     });
     createNewListElement(file);
   }
+  console.log(chosenFiles);
 }
 
 function createNewListElement(file) {
-  console.log(chosenFiles);
   const prototypeEl = document.querySelector(".images-list__item--prototype");
   const clonedPrototypeEl = prototypeEl.cloneNode(true);
   imagesList.appendChild(clonedPrototypeEl);
