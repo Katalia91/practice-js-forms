@@ -55,13 +55,13 @@ function validateForm(e) {
   if (houseNumberValue <= 0) {
     hasError = true;
     addErrorMessage(
-      "House number cannot be a negative number or letters, write correct house number",
+      "House number cannot include letters, write correct house number",
     );
   }
   if (flatNumberValue <= 0) {
     hasError = true;
     addErrorMessage(
-      "Flat number cannot be a negative number or letters, write correct house number",
+      "Flat number cannot include letters, write correct house number",
     );
   }
   if (!postCodeValue.match(zipPattern)) {
