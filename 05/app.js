@@ -13,6 +13,7 @@ const messagesList = document.querySelector(".messages");
 form.addEventListener("submit", validateForm);
 
 function validateForm(e) {
+  messagesList.innerText = "";
   e.preventDefault();
 
   const firstNameValue = firstName.value;
@@ -24,53 +25,65 @@ function validateForm(e) {
   const cityNameValue = cityName.value;
   const voivodeshipNameValue = voivodeshipName.value;
   const zipPattern = postCode.pattern;
-  console.log(zipPattern);
-
-  if (firstNameValue.length < 3) {
+  let hasError = false;
+  const namePattern = /^[a-zA-Z]+$/;
+  if (firstNameValue.length < 3 || !namePattern.test(firstNameValue)) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
       "Write correct first name, it has to be longer than 2 characters and only contain letters";
+    hasError = true;
   }
-  if (lastNameValue.length < 3) {
+  if (lastNameValue.length < 3 || !namePattern.test(lastNameValue)) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
       "Write correct last name, it has to be longer than 2 characters and only contain letters";
+    hasError = true;
   }
-  if (streetNameValue.length < 3) {
+  if (streetNameValue.length < 3 || streetNameValue === Number) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
       "Write correct street name, it has to be longer than 2 characters and only contain letters";
+    hasError = true;
   }
   if (houseNumberValue <= 0) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
-      "House number cannot be a negative number letters, write correct house number";
+      "House number cannot be a negative number or letters, write correct house number";
+    hasError = true;
   }
   if (flatNumberValue <= 0) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
-      "Flat number cannot be a negative number letters, write correct house number";
+      "Flat number cannot be a negative number or letters, write correct house number";
+    hasError = true;
   }
   if (!postCodeValue.match(zipPattern)) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
       "Zip code has to be numbers and it has to be in XX-XXX format.";
+    hasError = true;
   }
   if (cityNameValue.length < 2) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText =
       "Write correct city name, it has to be longer than 1 character and only contain letters";
+    hasError = true;
   }
   if (!voivodeshipNameValue) {
     const newMessage = document.createElement("li");
     messagesList.appendChild(newMessage);
     newMessage.innerText = "You need to select a voivodeship";
+    hasError = true;
+  }
+  if (hasError === false) {
+    console.log("Correct");
+    form.reset();
   }
 }
