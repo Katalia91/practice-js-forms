@@ -14,9 +14,8 @@ function addUser(e) {
   if (firstName.value && lastName.value) {
     usersList.appendChild(newListEl);
     newListEl.innerText = fullName;
+    formEl.reset();
   } else {
     alert("The fields are empty!");
   }
-
-  formEl.reset();
 }
